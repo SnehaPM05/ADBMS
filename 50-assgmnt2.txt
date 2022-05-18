@@ -1,7 +1,7 @@
 -- 
 -- Roll No: <50>
 -- Name: <Sneha.p.m.>
--- Program: <program name>
+-- Program: <assignment2>
 -- 
 
 
