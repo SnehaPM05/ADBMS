@@ -1,0 +1,43 @@
+-- 
+-- Roll No: <50>
+-- Name: <Sneha PM>
+-- Program: <program name>
+-- 
+
+
+--
+-- Table structure for table <table_name>
+--
+
+-- ---------create/alter statement commands----------- # This line may be removed in the actual file
+
+--
+-- Dumping data for table <Teaches>
+--
+
+insert into Teaches values('A00',"DFCA",'2022-10-13','2022-12-15');
+insert into Teaches values('A01',"SE",'2022-10-13','2022-12-15');
+insert into Teaches values('A02',"MFC",'2022-10-13','2022-12-15');
+insert into Teaches values('A02',"ACN",'2022-10-13','2022-12-15');
+insert into Teaches values('A02',"ADS",'2022-10-13','2022-12-15');
+
+update subject set duration=5;
+
+
+
+
+--
+-- SQl Query Statements
+--
+
+ 
+select * from faculty where doj>='2020-03-10';
+-- -----Question3-------- 
+select * from subject where roomno=101 and duration>2;
+-- -----Question4-------- 
+select * from Teaches where sdate>='2020-04-01' and edate<='2020-04-30';
+-- -----Question5-------- 
+select faculty.fname,subject.sname,subject.duration from faculty,subject where faculty.fno=subject.fno and subject.duration;
+-- -----Question6-------- 
+
+

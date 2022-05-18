@@ -1,0 +1,114 @@
+-- 
+-- Roll No: <Sneha P.M>
+-- Name: <50>
+-- Program: <program name>
+-- 
+
+
+--
+-- Table structure for table <customer>
+--
+
+create table customer(license_no varchar(10) primary key,name varchar(10),address varchar(20),age int,phone int);
+--
+-- Table structure for table <vehicle>
+--
+create table vehicle(reg_no varchar(10) primary key,make varchar(10) not null,model varchar(10) not null,yom int,cc varchar(10),sc int);
+--
+-- Table structure for table <owns>
+--
+create table owns(license_no varchar(10),reg_no varchar(10),foreign key(license_no) references customer(license_no),foreign key(reg_no) references vehicle(reg_no));
+--
+-- Table structure for table <policy>
+--
+create table policy(policy_no varchar(10) primary key,license_no varchar(10),reg_no varchar(10),issue_date date,value int,policy_amt int, mode varchar(10),foreign key(license_no) references customer(license_no),foreign key(reg_no) references vehicle(reg_no));
+
+--
+-- Table structure for table <accident>
+--
+ create table accident(claim_no varchar(10) primary key,location vamysql>  create table accident(claim_no varchar(10) primary key,location varchar(10),doa date);
+--
+-- Table structure for table <participated>
+--
+create table participated(license_no varchar(10),reg_no varchar(10),claim_no varchar(10),amt int,foreign key(license_no) references cusicense_no),foreign key(reg_no) references vehicle(reg_no),foreign key(claim_no) references accident(claim_no));
+
+
+--
+-- Dumping data for table <customer>
+--
+
+insert into customer values(100,'david','kerala',30,97478754);
+insert into customer values(102,'vinod','mumbai',20,'9747881122');
+insert into customer values(101,'ravi','delhi',20,'97478841');
+insert into customer values(103,'suraj','karnataka',29,'81875599');
+insert into customer values(104,'Abel','rajasthan',27,'81875592');
+insert into customer values(105,'vijay','gujarath',26,'81875591');
+insert into customer values(106,'John','goa',31,'81873591');
+--
+-- Dumping data for table <vehicle>
+--
+insert into vehicle values('KL65C6887','maruti','Alto',2014,800,4);
+insert into vehicle values('KL55B9282','maruti','Ertiga',2015,1500,7);
+insert into vehicle values('KL53J7568','BMW','s6',2012,2500,4);
+insert into vehicle values('KL65C6888','maruti','Alto',2015,800,4);
+insert into vehicle values('KL65C6912','kia','seltos',2021,800,4);
+insert into vehicle values('KL65C7111','toyoto','Innova',2016,1330,4);
+insert into vehicle values('KL54k75151','suzuki','swift',2016,3000,4);
+--
+-- Dumping data for table <owns>
+--
+insert into owns values (100,'KL53J7568');
+insert into owns values (101,'KL55B9282');
+insert into owns values (102,'KL65C6887');
+insert into owns values (103,'KL65C6888');
+insert into owns values (104,'KL65C6912');
+insert into owns values (105,'KL65C7111');
+insert into owns values (106,'KL54k75151');
+--
+-- Dumping data for table <policy>
+--
+insert into policy values('1','100','KL53J7568','2016-01-01','15000','10000','cheque');
+insert into policy values('2','101','KL55B9282','2017-01-01','16000','9000','cheque');
+insert into policy values(3,'102','KL65C6887','2012-10-01',16000,9000,'cash');
+insert into policy values(4,'103','KL65C6888','2009-12-01',9000,5000,'UPI');
+INSERT INTO policy VALUES(5,'104','KL65C6912','2015-11-11',19000,15000,'UPI');
+INSERT INTO policy VALUES(6,'105','KL65C7111','2015-11-11',18000,15000,'UPI');
+INSERT INTO policy VALUES(7,'106','KL54k75151','2016-01-01',15000,10000,'cheque');
+--
+-- Dumping data for table <accident>
+--
+insert into accident values (01,'malappuram','2016-10-10');
+insert into accident values (02,'Kuttipuram','2017-10-10');
+insert into accident values (03,'Kunamkulam','2022-03-01');
+insert into accident values (04,'Edappal','2020-03-01');
+insert into accident values (5,'Thrissur','2020-04-01');
+insert into accident values (6,'kozhikod','2016-10-10');
+--
+-- Dumping data for table <participated>
+--
+INSERT INTO participated VALUES (100,'KL53J7568',01,1000);
+INSERT INTO participated VALUES (101,'KL55B9282',3,2000);
+INSERT INTO participated VALUES (104,'KL65C6912',5,3000);
+--
+-- SQl Query Statements
+--
+
+select customer.name,policy.policy_no from customer,policy where policy.license_no=customer.license_no and policy.issue_date>'2014-01-01';
+
+-- -----Question 1---------------
+
+select  c.name,p.reg_no,p.license_no from customer as c,policy as p where p.license_no=c.license_no and mode='cheque';
+
+-- -----Question 2---------------
+
+select name,license_no from customer natural join (vehicle natural join policy)where make='maruti';
+
+-- -----Question 3---------------
+
+select name from customer natural join(accident natural join(participated natural join policy))where datediff(doa,issue_date)<365;
+
+-- -----Question 4---------------
+
+select name,count(license_no)from participated natural join customer group by license_no having name='john';
+
+-- -----Question 5---------------
